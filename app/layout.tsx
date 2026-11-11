@@ -12,34 +12,41 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Ibrahim Memon - Software Engineer & UI/UX Designer",
-  description: "A self-taught UI/UX designer and Software Engineer at WebHR. Creating meaningful and delightful digital products that balance user needs and business goals. 3+ years of industry experience.",
+  title: "Hasan Jamal - DevOps Engineer | Cloud, Kubernetes & DevSecOps",
+  description: "DevOps Engineer with 3.5+ years hardening multi-cloud platforms across AWS and Azure. GitOps, Kubernetes at scale, CI/CD automation, and a DevSecOps mindset baked into every pipeline.",
   keywords: [
-    "Ibrahim Memon",
-    "Software Engineer",
-    "UI/UX Designer",
-    "Frontend Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Web Designer",
-    "WebHR Engineer",
+    "Hasan Jamal",
+    "DevOps Engineer",
+    "Site Reliability Engineer",
+    "Cloud Engineer",
+    "DevSecOps Engineer",
+    "Kubernetes",
+    "AKS",
+    "AWS",
+    "Azure",
+    "Terraform",
+    "CI/CD",
+    "GitOps",
+    "ArgoCD",
+    "Docker",
+    "Linux Administration",
     "Portfolio",
   ],
-  authors: [{ name: "Ibrahim Memon" }],
-  creator: "Ibrahim Memon",
-  publisher: "Ibrahim Memon",
+  authors: [{ name: "Hasan Jamal" }],
+  creator: "Hasan Jamal",
+  publisher: "Hasan Jamal",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ibiimemon.com",
-    title: "Ibrahim Memon - Software Engineer & UI/UX Designer",
-    description: "A self-taught UI/UX designer and Software Engineer at WebHR. Creating meaningful and delightful digital products.",
-    siteName: "Ibrahim Memon Portfolio",
+    url: "https://hasanjamal.dev",
+    title: "Hasan Jamal - DevOps Engineer | Cloud, Kubernetes & DevSecOps",
+    description: "DevOps Engineer with 3.5+ years hardening multi-cloud platforms across AWS and Azure. GitOps, Kubernetes at scale, and a DevSecOps mindset baked into every pipeline.",
+    siteName: "Hasan Jamal Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ibrahim Memon - Software Engineer & UI/UX Designer",
-    description: "A self-taught UI/UX designer and Software Engineer at WebHR.",
+    title: "Hasan Jamal - DevOps Engineer | Cloud, Kubernetes & DevSecOps",
+    description: "DevOps Engineer with 3.5+ years hardening multi-cloud platforms across AWS and Azure.",
   },
   robots: {
     index: true,
@@ -68,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://ibiimemon.com" />
+        <link rel="canonical" href="https://hasanjamal.dev" />
       </head>
       <body
         className={`${poppins.variable} font-sans antialiased`}
