@@ -60,9 +60,9 @@ export default function Banner(): React.JSX.Element {
       className="min-h-screen flex items-center justify-center pt-20 px-6"
     >
       <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center ">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
           {/* Right side - Photo */}
-          <div className="flex justify-center lg:justify-end relative w-full lg:w-auto">
+          <div className="flex justify-center lg:justify-end relative w-full lg:w-auto lg:shrink-0">
             <div className="relative top-10">
               {/* Mobile: Hello text positioned on top of image */}
               <div className="lg:hidden  -top-150 z-10">
@@ -135,18 +135,18 @@ export default function Banner(): React.JSX.Element {
             <div className="">
               <p className="text-2xl"> An Engineer who </p>
               <h1 className="text-5xl tracking-tight lg:text-7xl font-semibold text-white leading-tight">
-                Judges a system
-                <br /> by its{" "}
+                Measures success
+                <br /> in{" "}
                 <span className="relative inline-block">
-                  <Image src="/assets/circle.png" alt="Circle" width={230} height={200} className="absolute mt-2 -left-3" />
+                  <Image src="/assets/circle.png" alt="Circle" width={180} height={160} className="absolute mt-2 -left-3" />
                   <span className="bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600 bg-clip-text text-transparent">
-                    uptime
+                    nines
                   </span>
                 </span>
                 ...
               </h1>
               <p className="text-md text-white/80">
-                Because if it falls over at 3AM, nothing else matters.
+                Four nines isn&apos;t a goal. It&apos;s a job description.
               </p>
             </div>
           </div>
