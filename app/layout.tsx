@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
 
 import "./globals.css";
+import CursorTrail from "./components/CursorTrail";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -81,6 +82,7 @@ export default function RootLayout({
         className={`${poppins.variable} font-sans antialiased`}
       >
         {children}
+        <CursorTrail />
         <Analytics />
       </body>
     </html>

@@ -20,11 +20,36 @@ export default function Footer(): React.JSX.Element {
           >
             Hasanjamal4141@gmail.com
           </a>
-          <p className="text-sm text-white/50 mt-2">Islamabad, Pakistan · +92-301-4141994</p>
+          <p className="text-sm text-white/50 mt-2">
+            Islamabad, Pakistan ·{" "}
+            <a
+              href="https://wa.me/923014141994"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-purple-300 transition-colors"
+            >
+              +92-301-4141994
+            </a>
+          </p>
         </div>
 
         {/* Social Media Icons */}
         <div className="flex justify-center gap-6 mt-12">
+          <a
+            href="https://wa.me/923014141994"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-purple-500/30 hover:border-purple-500/50 transition-all"
+            aria-label="WhatsApp"
+          >
+            <svg
+              className="w-5 h-5 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2 22l5.25-1.38c1.45.79 3.08 1.21 4.78 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.05 2h-.01zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 01-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24zm-4.52 4.73c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.67 2.63 4.11 3.58.57.24 1.02.38 1.37.49.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.41-.14-.01-.3-.01-.46-.01z" />
+            </svg>
+          </a>
           <Link
             href="https://www.linkedin.com/in/hasan-jamal-6b4b34262/"
             target="_blank"
