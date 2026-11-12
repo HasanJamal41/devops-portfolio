@@ -153,7 +153,7 @@ function DevSecOpsDiagram() {
   const w = 90;
   const gap = 12;
   return (
-    <svg viewBox="0 0 520 260" className="w-full h-full">
+    <svg viewBox="0 0 570 260" className="w-full h-full">
       <DiagramDefs />
       {stages.map((s, i) => (
         <Node key={s.label} x={20 + i * (w + gap)} y={90} w={w} h={56} label={s.label} sub={s.sub} accent={i >= 2} />
@@ -169,7 +169,7 @@ function DevSecOpsDiagram() {
       ))}
       <Arrow x1={20 + 4 * (w + gap) + w / 2} y1={146} x2={20 + 4 * (w + gap) + w / 2} y2={185} />
       <Node x={20 + 4 * (w + gap) + w / 2 - 70} y={185} w={140} h={48} label="Deploy — gated" sub="auditable release" accent />
-      <text x={260} y={40} textAnchor="middle" className="fill-purple-300" style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1 }}>
+      <text x={285} y={40} textAnchor="middle" className="fill-purple-300" style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1 }}>
         20+ PROJECTS · EVERY RELEASE SCANNED
       </text>
     </svg>

@@ -31,6 +31,26 @@ export default function Footer(): React.JSX.Element {
               +92-301-4141994
             </a>
           </p>
+          <a
+            href="/Hasan-Jamal-Resume.pdf"
+            download
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium transition-colors"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 3v12" />
+              <path d="M7 10l5 5 5-5" />
+              <path d="M5 21h14" />
+            </svg>
+            Download Resume
+          </a>
         </div>
 
         {/* Social Media Icons */}
