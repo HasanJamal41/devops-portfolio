@@ -133,20 +133,19 @@ export default function Banner(): React.JSX.Element {
               <div className="absolute -bottom-2 left-8 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white/10"></div>
             </div>
             <div className="">
-              <p className="text-2xl"> An Engineer who </p>
               <h1 className="text-5xl tracking-tight lg:text-7xl font-semibold text-white leading-tight">
-                Measures success
-                <br /> in{" "}
+                I Turn Infrastructure
+                <br /> Into{" "}
                 <span className="relative inline-block">
-                  <Image src="/assets/circle.png" alt="Circle" width={180} height={160} className="absolute mt-2 -left-3" />
+                  <Image src="/assets/circle.png" alt="Circle" width={260} height={200} className="absolute mt-2 -left-3" />
                   <span className="bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600 bg-clip-text text-transparent">
-                    nines
+                    Confidence
                   </span>
                 </span>
-                ...
+                .
               </h1>
               <p className="text-md text-white/80">
-                Four nines isn&apos;t a goal. It&apos;s a job description.
+                Scalable, secure, and production-ready cloud platforms.
               </p>
             </div>
           </div>

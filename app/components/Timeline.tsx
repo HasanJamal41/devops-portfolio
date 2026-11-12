@@ -75,21 +75,15 @@ export default function Timeline(): React.JSX.Element {
               return (
                 <div
                   key={role.id}
-                  className={`relative pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-10 ${
-                    isEven ? "" : ""
-                  }`}
+                  className="relative pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-10"
                 >
                   <span className="absolute left-0 md:left-1/2 top-1.5 md:-translate-x-1/2 w-6 h-6 rounded-full bg-[#110720] border-2 border-purple-500 flex items-center justify-center">
                     <span className="w-2 h-2 rounded-full bg-purple-400" />
                   </span>
 
-                  <div className={`${isEven ? "md:col-start-2" : "md:col-start-1 md:text-right"}`}>
-                    {!isEven && <div className="hidden md:block" />}
-                  </div>
-
                   <div
                     className={`${
-                      isEven ? "md:col-start-2" : "md:col-start-1 md:row-start-1"
+                      isEven ? "md:col-start-2" : "md:col-start-1"
                     } bg-gradient-to-r from-slate-950 via-purple-950 to-slate-950 backdrop-blur-sm rounded-xl p-6 border-t-3 border-purple-700 hover:shadow-2xl hover:shadow-purple-900 transition-shadow`}
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
