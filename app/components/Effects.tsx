@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
+import Lenis from "lenis";
 
-const GLYPHS = "!<>-_\\/[]{}=+*^?#01";
-
-// Page-wide progressive enhancements: scroll reveals, counters, decoding labels,
-// cursor spotlight on cards, magnetic buttons and the experience rail fill.
+// Page-wide progressive enhancements: smooth scrolling, scroll reveals, counters,
+// cursor spotlight on cards and the experience rail fill.
 export default function Effects(): null {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cleanups: (() => void)[] = [];
+
+    if (!reduce) {
+      const lenis = new Lenis({ autoRaf: true, lerp: 0.09, anchors: { offset: -88 } });
+      cleanups.push(() => lenis.destroy());
+    }
 
     const reveal = new IntersectionObserver(
       (entries) =>
@@ -50,36 +54,6 @@ export default function Effects(): null {
     document.querySelectorAll(".count").forEach((el) => counters.observe(el));
     cleanups.push(() => counters.disconnect());
 
-    const scramble = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          scramble.unobserve(e.target);
-          if (reduce) return;
-          const el = e.target as HTMLElement;
-          const final = el.textContent ?? "";
-          const total = 28;
-          let frame = 0;
-          const tick = () => {
-            let out = "";
-            for (let i = 0; i < final.length; i++) {
-              out +=
-                i < (frame / total) * final.length || final[i] === " "
-                  ? final[i]
-                  : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-            }
-            el.textContent = out;
-            frame++;
-            if (frame <= total) window.setTimeout(tick, 30);
-            else el.textContent = final;
-          };
-          tick();
-        }),
-      { threshold: 1 }
-    );
-    document.querySelectorAll(".scramble").forEach((el) => scramble.observe(el));
-    cleanups.push(() => scramble.disconnect());
-
     document.querySelectorAll<HTMLElement>(".spot").forEach((el) => {
       const move = (e: PointerEvent) => {
         const r = el.getBoundingClientRect();
@@ -89,24 +63,6 @@ export default function Effects(): null {
       el.addEventListener("pointermove", move);
       cleanups.push(() => el.removeEventListener("pointermove", move));
     });
-
-    if (!reduce && window.matchMedia("(pointer: fine)").matches) {
-      document.querySelectorAll<HTMLElement>(".magnetic").forEach((b) => {
-        const move = (e: PointerEvent) => {
-          const r = b.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width / 2) * 0.18;
-          const y = (e.clientY - r.top - r.height / 2) * 0.28;
-          b.style.transform = `translate(${x}px, ${y}px)`;
-        };
-        const leave = () => (b.style.transform = "");
-        b.addEventListener("pointermove", move);
-        b.addEventListener("pointerleave", leave);
-        cleanups.push(() => {
-          b.removeEventListener("pointermove", move);
-          b.removeEventListener("pointerleave", leave);
-        });
-      });
-    }
 
     const xp = document.getElementById("xp");
     const rail = document.getElementById("railfill");

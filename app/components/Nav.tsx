@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { navLinks } from "../data";
+import { contact, navLinks } from "../data";
 import { Icon } from "./ui";
 
 export default function Nav(): React.JSX.Element {
@@ -44,8 +44,9 @@ export default function Nav(): React.JSX.Element {
               </a>
             ))}
           </nav>
-          <a className="btn btn-p btn-sm magnetic" href="#contact">
-            Let’s talk
+          <a className="btn btn-p btn-sm" href={contact.resume} download>
+            <Icon.download />
+            Résumé
           </a>
           <button
             className="menu-btn"

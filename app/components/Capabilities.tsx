@@ -19,19 +19,19 @@ export default function Capabilities(): React.JSX.Element {
     <section className="wrap sec" id="capabilities">
       <div className="head">
         <div>
-          <span className="kicker scramble">01 / Capabilities</span>
+          <span className="kicker">03 / Capabilities</span>
           <h2 className="h2 rv">
-            Everything between <span className="grad nw">git push</span> and a healthy pod.
+            From <span className="grad nw">git push</span> to a healthy pod.
           </h2>
         </div>
-        <p className="sub rv">Six areas I own end to end — each one running live below.</p>
+        <p className="sub rv">Six disciplines I own end to end, each shown running live.</p>
       </div>
 
       <div className="bento">
         <article className="spot tile s4 rv">
           <div className="ticon"><Icon.bolt /></div>
           <h3 className="tt">CI/CD &amp; automation</h3>
-          <p className="td">Pipelines that ship on their own schedule, not on hope. Build, test, scan and release — automated end to end.</p>
+          <p className="td">Build, test, scan and release workflows that run on every change, with approval gates and full audit trails.</p>
           <div className="viz v-pipe" aria-hidden="true">
             <div className="stages">
               {stages.map((s, i) => (
@@ -52,7 +52,7 @@ export default function Capabilities(): React.JSX.Element {
         <article className="spot tile s2 rv" style={reveal(0.08)}>
           <div className="ticon"><Icon.cloud /></div>
           <h3 className="tt">Multi-cloud</h3>
-          <p className="td">Provisioned, scaled and secured wherever the workload lives.</p>
+          <p className="td">Workloads provisioned, scaled and secured across AWS and Azure.</p>
           <div className="viz v-orbit" aria-hidden="true">
             <div className="ring r2"><b /></div>
             <div className="ring r1"><b /></div>
@@ -61,22 +61,20 @@ export default function Capabilities(): React.JSX.Element {
               <span><Logo src="/logos/azure.svg" size={28} /></span>
             </div>
           </div>
-          <div className="chips">
-            {["EKS", "AKS", "EC2", "Lambda", "IAM"].map((s) => <span key={s} className="chip">{s}</span>)}
-          </div>
+          <Chips tools={capabilityTools.cloud} />
         </article>
 
         <article className="spot tile s2 rv">
           <div className="ticon"><Icon.cube /></div>
           <h3 className="tt">Kubernetes &amp; GitOps</h3>
-          <p className="td">Declarative, self-healing clusters. A pod dies — it’s back before anyone notices.</p>
+          <p className="td">Declarative, self-healing clusters managed through Git, with ArgoCD and FluxCD keeping state in sync.</p>
           <div className="viz v-pods" aria-hidden="true">
             <div className="pods">
               {Array.from({ length: 24 }, (_, i) => (
                 <span key={i} className={i === 13 ? "pod heal" : "pod"} style={delay(+(i * 0.13).toFixed(2))} />
               ))}
             </div>
-            <div className="vlbl"><span>24/24 running</span><span className="okc">self-healed</span></div>
+            <div className="vlbl"><span>replicas</span><span className="okc">self-healing</span></div>
           </div>
           <Chips tools={capabilityTools.k8s} />
         </article>
@@ -84,7 +82,7 @@ export default function Capabilities(): React.JSX.Element {
         <article className="spot tile s2 rv" style={reveal(0.08)}>
           <div className="ticon"><Icon.chart /></div>
           <h3 className="tt">Observability</h3>
-          <p className="td">Metrics, logs and traces — plus an LLM that reads them for root cause.</p>
+          <p className="td">Metrics, logs and traces with alerting, plus LLM-assisted root cause analysis.</p>
           <div className="viz v-chart" aria-hidden="true">
             <div className="bars">
               {barHeights.map((h, i) => (
@@ -100,7 +98,7 @@ export default function Capabilities(): React.JSX.Element {
         <article className="spot tile s2 rv" style={reveal(0.16)}>
           <div className="ticon"><Icon.shield /></div>
           <h3 className="tt">DevSecOps</h3>
-          <p className="td">Scanned, stress-tested and pentested before an attacker gets the chance.</p>
+          <p className="td">SAST, image scanning, DAST and penetration testing built into the delivery lifecycle.</p>
           <div className="viz v-radar" aria-hidden="true">
             <span className="sweep2" />
             <span className="sweep" />
@@ -117,7 +115,7 @@ export default function Capabilities(): React.JSX.Element {
         <article className="spot tile s3 rv">
           <div className="ticon"><Icon.code /></div>
           <h3 className="tt">Infrastructure as code</h3>
-          <p className="td">Versioned, reviewed, reproducible. Never a hand-clicked snowflake.</p>
+          <p className="td">Versioned, peer-reviewed and reproducible environments with Terraform, CloudFormation and Helm.</p>
           <div className="viz v-code" aria-hidden="true">
             <span className="k">module</span> <span className="s">&quot;aks_platform&quot;</span> {"{"}
             {"\n  source  = "}<span className="s">&quot;./modules/aks&quot;</span>
@@ -132,7 +130,7 @@ export default function Capabilities(): React.JSX.Element {
         <article className="spot tile s3 rv" style={reveal(0.08)}>
           <div className="ticon"><Icon.terminal /></div>
           <h3 className="tt">Linux &amp; systems</h3>
-          <p className="td">Production Linux from storage and networking to hardening and HA — where it all started.</p>
+          <p className="td">Enterprise RHEL, CentOS and Ubuntu: storage, networking, hardening and high availability.</p>
           <div className="viz v-code" aria-hidden="true">
             <span className="pr">root@edge-01</span>:~# systemctl is-active keepalived
             {"\n"}<span className="s">active</span>

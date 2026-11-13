@@ -1,14 +1,15 @@
 import Image from "next/image";
-import { contact } from "../data";
-import { NetworkCanvas, Terminal, TypedWord } from "./HeroMotion";
+import { NetworkCanvas, Rotator, Terminal } from "./HeroMotion";
 import { Icon, Logo } from "./ui";
 
 const orbs = [
   { logo: "kubernetes", name: "Kubernetes", style: { left: "42%", top: -34 } },
   { logo: "aws", name: "AWS", style: { right: -30, top: 96, animationDelay: "-2s" } },
   { logo: "azure", name: "Azure", style: { right: -30, bottom: 110, animationDelay: "-4s" } },
-  { logo: "terraform", name: "Terraform", style: { left: -34, bottom: 110, animationDelay: "-5s" } },
+  { logo: "terraform", name: "Terraform", style: { left: -52, bottom: 120, animationDelay: "-5s" } },
 ];
+
+const delay = (s: string) => ({ "--rd": s }) as React.CSSProperties;
 
 export default function Hero(): React.JSX.Element {
   return (
@@ -26,40 +27,39 @@ export default function Hero(): React.JSX.Element {
               <Image src="/assets/hasan-headshot.jpg" alt="" width={34} height={34} priority />
             </span>
             <span>
-              Hi, I’m <b>Hasan Jamal</b>
+              <b>Hasan Jamal</b> · DevOps Engineer
             </span>
             <span className="live" aria-hidden="true" />
           </div>
-          <h1 className="h1 rv" style={{ "--rd": ".1s" } as React.CSSProperties} aria-label="Infrastructure that ships with confidence.">
-            <span className="line" aria-hidden="true">Infrastructure</span>
-            <span className="line" aria-hidden="true">that ships with</span>
-            <span className="line" aria-hidden="true">
-              <TypedWord />
+          <h1 className="h1 rv" style={delay(".1s")}>
+            <span className="line">Cloud platforms</span>
+            <span className="line">that stay</span>
+            <span className="line">
+              <Rotator />
             </span>
           </h1>
-          <p className="lede rv" style={{ "--rd": ".2s" } as React.CSSProperties}>
-            DevOps &amp; DevSecOps engineer with <strong>3.5+ years</strong> running multi-cloud platforms on{" "}
-            <strong>AWS and Azure</strong> — Kubernetes at scale, GitOps delivery, and a security scanner in every
-            pipeline.
+          <p className="lede rv" style={delay(".2s")}>
+            I design, automate and secure <strong>Kubernetes platforms on AWS and Azure</strong>. GitOps delivery,
+            Infrastructure as Code and security checks in every pipeline, backed by <strong>3.5+ years</strong> in
+            production.
           </p>
-          <div className="ctas rv" style={{ "--rd": ".3s" } as React.CSSProperties}>
-            <a className="btn btn-p magnetic" href="#work">
-              Explore my work <Icon.arrow />
+          <div className="ctas rv" style={delay(".3s")}>
+            <a className="btn btn-p" href="#projects">
+              View projects <Icon.arrow />
             </a>
-            <a className="btn magnetic" href={contact.resume} download>
-              <Icon.download />
-              Download résumé
+            <a className="btn" href="#contact">
+              Get in touch
             </a>
           </div>
-          <div className="now mono rv" style={{ "--rd": ".4s" } as React.CSSProperties}>
+          <div className="now mono rv" style={delay(".4s")}>
             <span className="live" aria-hidden="true" />
             <span>
-              DevOps Engineer at <b>TEO International</b> · open to new roles
+              DevOps Engineer at <b>TEO International</b> · Open to new opportunities
             </span>
           </div>
         </div>
 
-        <div className="console-wrap rv" style={{ "--rd": ".25s" } as React.CSSProperties}>
+        <div className="console-wrap rv" style={delay(".25s")}>
           {orbs.map((o) => (
             <div key={o.name} className="orb" style={o.style} title={o.name}>
               <Logo src={`/logos/${o.logo}.svg`} size={30} />
@@ -71,7 +71,7 @@ export default function Hero(): React.JSX.Element {
                 <i style={{ background: "#FF5F57" }} />
                 <i style={{ background: "#FEBC2E" }} />
                 <i style={{ background: "#28C840" }} />
-                <span>hasan@prod-cluster</span>
+                <span>release · production</span>
               </div>
               <Terminal />
               <div className="cfoot">
@@ -80,12 +80,12 @@ export default function Hero(): React.JSX.Element {
                   <b>AWS · Azure</b>
                 </div>
                 <div>
-                  <small>Clusters</small>
+                  <small>Runtime</small>
                   <b>AKS · EKS</b>
                 </div>
                 <div>
-                  <small>Status</small>
-                  <b className="okc">Available</b>
+                  <small>Delivery</small>
+                  <b className="okc">GitOps</b>
                 </div>
               </div>
             </div>

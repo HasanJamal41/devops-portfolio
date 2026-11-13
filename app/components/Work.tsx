@@ -1,4 +1,4 @@
-import { projectTools, type Tool } from "../data";
+import { moreProjects, projectTools, type Tool } from "../data";
 import { Chips, Logo } from "./ui";
 
 interface Node {
@@ -35,13 +35,15 @@ const svg = (stroke: string, children: React.ReactNode, width = 1.8) => (
 
 const projects: Project[] = [
   {
-    tag: "01 — Azure AKS · Integration",
+    tag: "01 · Azure AKS · Integration",
     title: "Enterprise cloud-native integration platform",
     description:
-      "A secure, tenant-aware platform on AKS. KrakenD fronts traffic with JWT auth and rate limiting, Apache Camel orchestrates REST, SOAP and SFTP connectors, and Kafka with Temporal keep every workflow event-driven and fault-tolerant.",
+      "A secure, tenant-aware integration platform on AKS. KrakenD handles JWT auth, aggregation and rate limiting. Apache Camel orchestrates REST, SOAP, SFTP, file and database connectors with retries and dead-letter handling, while Kafka and Temporal keep workflows event-driven and resumable.",
     wins: [
-      { title: "Tenant-isolated", sub: "Topics, RBAC and secrets per tenant" },
-      { title: "100% GitOps", sub: "Azure DevOps → Helm → ArgoCD" },
+      { title: "Multi-tenant", sub: "Shared, isolated and dedicated models" },
+      { title: "Policy as code", sub: "Kyverno, cert-manager and Key Vault" },
+      { title: "Full tracing", sub: "OpenTelemetry with correlation IDs" },
+      { title: "Auditable releases", sub: "Helm deploys behind approval gates" },
     ],
     tools: projectTools.integration,
     diagramLabel: "live architecture",
@@ -55,13 +57,13 @@ const projects: Project[] = [
     ],
   },
   {
-    tag: "02 — Kubernetes · AI",
+    tag: "02 · Kubernetes · AI",
     title: "AI-powered Kubernetes observability",
     description:
-      "Automated diagnostics across multiple clusters and remote Docker hosts, with LLM-based root-cause analysis that turns a wall of logs into an answer — plus live investigation workflows for the incident in front of you.",
+      "An observability and troubleshooting platform for Kubernetes and Docker. It runs automated diagnostics across multiple clusters and remote hosts, applies LLM-based root cause analysis to logs and metrics, and supports real-time investigation workflows.",
     wins: [
-      { title: "Hours → minutes", sub: "Incident triage after rollout" },
-      { title: "Multi-cluster", sub: "AKS + edge Docker hosts" },
+      { title: "Faster triage", sub: "Root cause surfaced automatically" },
+      { title: "Multi-cluster", sub: "AKS plus remote Docker hosts" },
     ],
     tools: projectTools.observability,
     diagramLabel: "signal flow",
@@ -81,13 +83,13 @@ const projects: Project[] = [
     ],
   },
   {
-    tag: "03 — DevSecOps",
+    tag: "03 · DevSecOps",
     title: "Pipeline hardening across 20+ projects",
     description:
-      "Security rolled into the pipeline instead of bolted on after. Every project runs static analysis, image scanning and dynamic testing before a single pod ships — backed by regular penetration testing.",
+      "Security integrated into delivery rather than added afterwards. Every project runs static analysis, container image scanning and dynamic testing before release, supported by regular penetration testing and reconnaissance.",
     wins: [
-      { title: "20+ projects", sub: "Every release scanned" },
-      { title: "Gated deploys", sub: "A failed scan blocks the release" },
+      { title: "20+ projects", sub: "Scanned on every release" },
+      { title: "Gated deploys", sub: "Failed checks block the release" },
     ],
     tools: projectTools.devsecops,
     diagramLabel: "release gate",
@@ -119,15 +121,15 @@ function DiagramNode({ node }: { node: Node }) {
 
 export default function Work(): React.JSX.Element {
   return (
-    <section className="wrap sec" id="work" style={{ paddingBottom: 40 }}>
+    <section className="wrap sec" id="projects">
       <div className="head">
         <div>
-          <span className="kicker scramble">03 / Selected work</span>
+          <span className="kicker">06 / Projects</span>
           <h2 className="h2 rv">
-            Systems, <span className="grad">not screenshots.</span>
+            Platforms I have <span className="grad">architected and shipped.</span>
           </h2>
         </div>
-        <p className="sub rv">Three platforms I architected and shipped — with the traffic flowing through them.</p>
+        <p className="sub rv">Featured case studies with live architecture diagrams, followed by more engineering work.</p>
       </div>
 
       <div className="stack">
@@ -166,6 +168,18 @@ export default function Work(): React.JSX.Element {
                 </div>
               ))}
             </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="subhead">More engineering work</div>
+      <div className="minis">
+        {moreProjects.map((p, i) => (
+          <article key={p.title} className="spot mini rv" style={{ "--rd": `${(i % 3) * 0.06}s` } as React.CSSProperties}>
+            <span className="idx">{String(i + 4).padStart(2, "0")}</span>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+            <Chips tools={p.tools} />
           </article>
         ))}
       </div>

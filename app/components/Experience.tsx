@@ -6,13 +6,13 @@ export default function Experience(): React.JSX.Element {
     <section className="wrap sec" id="experience">
       <div className="head">
         <div>
-          <span className="kicker scramble">02 / Experience</span>
+          <span className="kicker">05 / Experience</span>
           <h2 className="h2 rv">
-            3.5 years <span className="grad">on call.</span>
+            Production experience, <span className="grad">from bare metal to AKS.</span>
           </h2>
         </div>
         <p className="sub rv">
-          From bare-metal RHEL to multi-tenant AKS — every role below is one where production was mine to keep up.
+          Three roles across Pakistan and Canada, each with direct ownership of production systems.
         </p>
       </div>
 
@@ -30,8 +30,10 @@ export default function Experience(): React.JSX.Element {
               </div>
               <h3 className="jt">{role.title}</h3>
               <p className="jc grad">{role.company}</p>
-              <p className="jl">{role.meta}</p>
-              <p className="jq">“{role.tagline}”</p>
+              <p className="jl">
+                {role.period} · {role.location}
+              </p>
+              <p className="jq">{role.summary}</p>
             </div>
             <div>
               <ul className="pts">

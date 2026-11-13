@@ -6,12 +6,23 @@ export function Logo({ src, size }: { src: string; size?: number }) {
   return <img src={src} alt="" width={size} height={size} decoding="async" />;
 }
 
+// Brand logo when one exists, otherwise a small monogram badge.
+export function ToolMark({ tool, size = 16 }: { tool: Tool; size?: number }) {
+  if (tool.logo) return <Logo src={tool.logo} size={size} />;
+  const letters = tool.name.replace(/[^A-Za-z0-9]/g, "").slice(0, 2);
+  return (
+    <span className="mg" aria-hidden="true">
+      {letters}
+    </span>
+  );
+}
+
 export function Chips({ tools }: { tools: Tool[] }) {
   return (
     <div className="chips">
       {tools.map((tool) => (
         <span key={tool.name} className="chip">
-          <Logo src={tool.logo} size={16} />
+          <ToolMark tool={tool} />
           {tool.name}
         </span>
       ))}
@@ -96,6 +107,12 @@ export const Icon = {
   linkedin: () => (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+    </svg>
+  ),
+  cap: () => (
+    <svg {...stroke}>
+      <path d="M22 10L12 5 2 10l10 5 10-5z" />
+      <path d="M6 12v5c3 2 9 2 12 0v-5" />
     </svg>
   ),
   menu: () => (

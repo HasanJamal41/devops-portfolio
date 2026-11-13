@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "@fontsource-variable/bricolage-grotesque/opsz.css";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

@@ -1,9 +1,12 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import { Marquee, Stats } from "./components/Stack";
+import { Marquee, StackMatrix } from "./components/Stack";
+import About from "./components/About";
+import Lifecycle from "./components/Lifecycle";
 import Capabilities from "./components/Capabilities";
 import Experience from "./components/Experience";
 import Work from "./components/Work";
+import Principles from "./components/Principles";
 import Contact from "./components/Contact";
 import Effects from "./components/Effects";
 
@@ -14,10 +17,13 @@ export default function Home(): React.JSX.Element {
       <main id="top">
         <Hero />
         <Marquee />
-        <Stats />
+        <About />
+        <Lifecycle />
         <Capabilities />
+        <StackMatrix />
         <Experience />
         <Work />
+        <Principles />
         <Contact />
       </main>
       <Effects />

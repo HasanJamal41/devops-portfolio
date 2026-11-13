@@ -122,59 +122,48 @@ export function NetworkCanvas(): React.JSX.Element {
   return <canvas id="net" ref={ref} aria-hidden="true" />;
 }
 
-const WORDS = ["confidence.", "zero downtime.", "GitOps.", "guardrails."];
+const WORDS = ["secure.", "reliable.", "observable.", "compliant."];
 
-// Types and deletes the last word of the hero headline.
-export function TypedWord(): React.JSX.Element {
-  const [text, setText] = useState(WORDS[0]);
+// Cycles the last headline word with a vertical slide. Every word sits in the same
+// grid cell, so the line width is fixed and nothing around it shifts.
+export function Rotator(): React.JSX.Element {
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (reduced()) return;
-    let timer = 0;
-    let wi = 0;
-    const cycle = () => {
-      const word = WORDS[wi];
-      let n = word.length;
-      const del = () => {
-        if (n > 0) {
-          setText(word.slice(0, --n) || " ");
-          timer = window.setTimeout(del, 40);
-          return;
-        }
-        wi = (wi + 1) % WORDS.length;
-        const next = WORDS[wi];
-        let k = 0;
-        const type = () => {
-          setText(next.slice(0, ++k));
-          timer = window.setTimeout(k < next.length ? type : cycle, k < next.length ? 75 : 0);
-        };
-        type();
-      };
-      timer = window.setTimeout(del, 2400);
-    };
-    cycle();
-    return () => window.clearTimeout(timer);
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % WORDS.length), 2600);
+    return () => window.clearInterval(id);
   }, []);
 
-  return <span className="typed grad">{text}</span>;
+  const prev = (index + WORDS.length - 1) % WORDS.length;
+  return (
+    <span className="rotator" aria-live="polite">
+      {WORDS.map((w, i) => (
+        <span key={w} className={`grad${i === index ? " on" : i === prev ? " out" : ""}`} aria-hidden={i !== index}>
+          {w}
+        </span>
+      ))}
+    </span>
+  );
 }
 
 type Line = { cmd: string } | { out: React.ReactNode };
 
 const LINES: Line[] = [
-  { cmd: "kubectl get engineer hasan -o wide" },
-  { out: <span className="dim">NAME    ROLE      EXP    CLOUDS      STATUS</span> },
-  { out: <>hasan   devops    3.5y   aws,azure   <span className="okc">Ready</span></> },
-  { cmd: "argocd app sync career --prune" },
-  { out: <><span className="okc">✔ Synced</span>   <span className="okc">✔ Healthy</span>   <span className="vio">rev HEAD</span></> },
-  { out: <span className="dim">→ open to new roles · Islamabad / remote</span> },
+  { cmd: "terraform apply -auto-approve" },
+  { out: <><span className="okc">Apply complete!</span> <span className="dim">12 added, 0 changed, 0 destroyed.</span></> },
+  { cmd: "trivy image api:1.8.0 --severity HIGH,CRITICAL" },
+  { out: <><span className="dim">Total:</span> <span className="okc">0</span> <span className="dim">(HIGH: 0, CRITICAL: 0)</span></> },
+  { cmd: "argocd app sync api-prod" },
+  { out: <><span className="okc">✓ Synced</span>   <span className="okc">✓ Healthy</span>   <span className="vio">rev 4f2a9c1</span></> },
+  { cmd: "kubectl rollout status deploy/api -n prod" },
+  { out: <span className="dim">deployment &quot;api&quot; successfully rolled out</span> },
 ];
 
-const Prompt = () => <span className="pr">~ $ </span>;
+const Prompt = () => <span className="pr">$ </span>;
 
-// Replays a short kubectl / argocd session on a loop.
+// Replays a short release: provision, scan, sync, verify. Loops quietly.
 export function Terminal(): React.JSX.Element {
-  // Each shown line, plus how many characters of the line currently being typed are visible.
   const [shown, setShown] = useState<number>(0);
   const [typed, setTyped] = useState<number>(0);
 
@@ -192,14 +181,14 @@ export function Terminal(): React.JSX.Element {
           setShown(0);
           setTyped(0);
           next();
-        }, 7000);
+        }, 6000);
         return;
       }
       const line = LINES[li];
       if ("out" in line) {
         li++;
         setShown(li);
-        timer = window.setTimeout(next, 260);
+        timer = window.setTimeout(next, 420);
         return;
       }
       let c = 0;
@@ -207,15 +196,15 @@ export function Terminal(): React.JSX.Element {
       setShown(li + 1);
       const t = () => {
         setTyped(++c);
-        if (c < line.cmd.length) timer = window.setTimeout(t, 38);
+        if (c < line.cmd.length) timer = window.setTimeout(t, 32);
         else {
           li++;
-          timer = window.setTimeout(next, 380);
+          timer = window.setTimeout(next, 520);
         }
       };
       t();
     };
-    timer = window.setTimeout(next, 700);
+    timer = window.setTimeout(next, 900);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -225,7 +214,7 @@ export function Terminal(): React.JSX.Element {
     <div
       className="cbody"
       role="img"
-      aria-label="Terminal showing engineer hasan: DevOps, 3.5 years, AWS and Azure, status Ready; career sync Synced and Healthy, open to new roles."
+      aria-label="Terminal running a production release: Terraform apply completes, Trivy finds no high or critical vulnerabilities, ArgoCD syncs the app as healthy, and the Kubernetes rollout succeeds."
     >
       {LINES.slice(0, shown).map((line, i) => {
         const typing = "cmd" in line && i === shown - 1 && typed < line.cmd.length;
