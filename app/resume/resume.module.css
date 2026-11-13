@@ -72,6 +72,9 @@
 .contact a {
   color: inherit;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
 }
 
 .sheet section {
@@ -205,6 +208,9 @@
   }
   .toolbar {
     display: none;
+  }
+  .contact a {
+    min-height: 0;
   }
   .sheet {
     max-width: none;

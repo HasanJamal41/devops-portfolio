@@ -17,7 +17,7 @@ const linkedin = contact.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\
 // Printable résumé. Light, single column and ATS-friendly; the PDF in /public is printed from this page.
 export default function ResumePage(): React.JSX.Element {
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <div className={styles.toolbar}>
         <Link href="/">← Back to portfolio</Link>
         <a className={styles.dl} href={contact.resume} download>
@@ -101,6 +101,6 @@ export default function ResumePage(): React.JSX.Element {
           </div>
         </section>
       </article>
-    </div>
+    </main>
   );
 }
