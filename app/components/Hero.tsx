@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { contact } from "../data";
 import { NetworkCanvas, Rotator, Terminal } from "./HeroMotion";
 import { Icon, Logo } from "./ui";
 
 const orbs = [
   { logo: "kubernetes", name: "Kubernetes", style: { left: "42%", top: -34 } },
-  { logo: "aws", name: "AWS", style: { right: -30, top: 96, animationDelay: "-2s" } },
-  { logo: "azure", name: "Azure", style: { right: -30, bottom: 110, animationDelay: "-4s" } },
+  { logo: "aws", name: "AWS", style: { right: -46, top: 96, animationDelay: "-2s" } },
+  { logo: "azure", name: "Azure", style: { right: -46, bottom: 120, animationDelay: "-4s" } },
   { logo: "terraform", name: "Terraform", style: { left: -52, bottom: 120, animationDelay: "-5s" } },
 ];
 
@@ -22,7 +23,7 @@ export default function Hero(): React.JSX.Element {
       <NetworkCanvas />
       <div className="wrap hero-grid">
         <div>
-          <div className="hello rv">
+          <div className="hello rise">
             <span className="ava">
               <Image src="/assets/hasan-headshot.jpg" alt="" width={34} height={34} priority />
             </span>
@@ -31,35 +32,46 @@ export default function Hero(): React.JSX.Element {
             </span>
             <span className="live" aria-hidden="true" />
           </div>
-          <h1 className="h1 rv" style={delay(".1s")}>
-            <span className="line">Cloud platforms</span>
-            <span className="line">that stay</span>
-            <span className="line">
+          <h1 className="h1 rise" style={delay(".1s")} aria-label="Cloud platforms that stay secure, reliable, observable and compliant.">
+            <span className="line" aria-hidden="true">Cloud platforms</span>
+            <span className="line" aria-hidden="true">that stay</span>
+            <span className="line" aria-hidden="true">
               <Rotator />
             </span>
           </h1>
-          <p className="lede rv" style={delay(".2s")}>
+          <p className="lede rise" style={delay(".2s")}>
             I design, automate and secure <strong>Kubernetes platforms on AWS and Azure</strong>. GitOps delivery,
             Infrastructure as Code and security checks in every pipeline, backed by <strong>3.5+ years</strong> in
             production.
           </p>
-          <div className="ctas rv" style={delay(".3s")}>
+          <div className="ctas rise" style={delay(".3s")}>
             <a className="btn btn-p" href="#projects">
               View projects <Icon.arrow />
             </a>
-            <a className="btn" href="#contact">
-              Get in touch
+            <a className="btn" href={contact.resume} download>
+              <Icon.download />
+              Résumé
+            </a>
+            <a
+              className="btn icon-btn"
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              title="LinkedIn"
+            >
+              <Icon.linkedin />
             </a>
           </div>
-          <div className="now mono rv" style={delay(".4s")}>
+          <div className="now mono rise" style={delay(".4s")}>
             <span className="live" aria-hidden="true" />
             <span>
-              DevOps Engineer at <b>TEO International</b> · Open to new opportunities
+              DevOps Engineer at <b>TEO International</b> · {contact.location} · Open to new roles
             </span>
           </div>
         </div>
 
-        <div className="console-wrap rv" style={delay(".25s")}>
+        <div className="console-wrap rise" style={delay(".25s")}>
           {orbs.map((o) => (
             <div key={o.name} className="orb" style={o.style} title={o.name}>
               <Logo src={`/logos/${o.logo}.svg`} size={30} />

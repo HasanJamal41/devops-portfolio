@@ -23,7 +23,10 @@ export function NetworkCanvas(): React.JSX.Element {
     if (!cv || !ctx) return;
     const host = cv.parentElement!;
     const reduce = reduced();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    // Phones get fewer nodes and a 1x canvas; the effect is ambient, not detail.
+    const dpr = touch ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
+    const maxNodes = touch ? 28 : 60;
     const mouse = { x: -999, y: -999 };
     let pts: Point[] = [];
     let w = 0;
@@ -37,7 +40,7 @@ export function NetworkCanvas(): React.JSX.Element {
       cv.width = w * dpr;
       cv.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(90, (w * h) / 16000));
+      const n = Math.round(Math.min(maxNodes, (w * h) / 18000));
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -104,17 +107,27 @@ export function NetworkCanvas(): React.JSX.Element {
       if (visible && !was) draw();
     });
 
+    let lastW = window.innerWidth;
+    // Mobile browsers fire resize when the address bar hides; only rebuild on a real width change.
+    const onResize = () => {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      size();
+    };
+
     size();
     draw();
-    host.addEventListener("pointermove", move);
-    host.addEventListener("pointerleave", leave);
-    window.addEventListener("resize", size);
+    if (!touch) {
+      host.addEventListener("pointermove", move, { passive: true });
+      host.addEventListener("pointerleave", leave);
+    }
+    window.addEventListener("resize", onResize, { passive: true });
     io.observe(cv);
     return () => {
       cancelAnimationFrame(raf);
       host.removeEventListener("pointermove", move);
       host.removeEventListener("pointerleave", leave);
-      window.removeEventListener("resize", size);
+      window.removeEventListener("resize", onResize);
       io.disconnect();
     };
   }, []);
@@ -137,9 +150,9 @@ export function Rotator(): React.JSX.Element {
 
   const prev = (index + WORDS.length - 1) % WORDS.length;
   return (
-    <span className="rotator" aria-live="polite">
+    <span className="rotator" aria-hidden="true">
       {WORDS.map((w, i) => (
-        <span key={w} className={`grad${i === index ? " on" : i === prev ? " out" : ""}`} aria-hidden={i !== index}>
+        <span key={w} className={`grad${i === index ? " on" : i === prev ? " out" : ""}`} >
           {w}
         </span>
       ))}

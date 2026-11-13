@@ -8,12 +8,16 @@ Personal portfolio for Hasan Jamal, DevOps and DevSecOps engineer. Built with [N
 - **About** with key facts, focus areas and education.
 - **Delivery lifecycle** from plan to monitor, with the tools used at each stage.
 - **Capabilities** shown as live tiles: CI/CD pipeline, multi-cloud, self-healing pods, metrics, security radar, IaC and Linux.
-- **Tech stack** matrix of 60+ tools grouped by layer, with brand logos in `public/logos`.
+- **Tech stack** matrix of 90+ tools in 12 groups, with brand logos in `public/logos`.
 - **Experience** as a git-style timeline with full role details.
 - **Projects**: three featured case studies with animated architecture diagrams, plus six more.
 - **Principles** and **Contact**, followed by a full footer.
 
-Smooth scrolling uses [Lenis](https://github.com/darkroomengineering/lenis). All motion is disabled under `prefers-reduced-motion`.
+Animations use [Motion](https://motion.dev): scroll reveals, count-up numbers, spring hover, and scroll-linked effects (progress bar, experience rail, stacking project cards) that run on the browser's native ScrollTimeline where available. Looping CSS animations pause when their section is off screen. All motion is disabled under `prefers-reduced-motion`.
+
+Fonts (Bricolage Grotesque, Inter, JetBrains Mono, all SIL Open Font License) are self-hosted in `app/fonts` and loaded with `next/font/local`.
+
+SEO: canonical URL, Open Graph image (`app/opengraph-image.tsx`), `sitemap.xml`, `robots.txt` and Person structured data. Set `NEXT_PUBLIC_SITE_URL` in Vercel if a custom domain is added; otherwise it defaults to the Vercel URL.
 
 ## Editing content
 

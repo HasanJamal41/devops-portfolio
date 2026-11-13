@@ -38,7 +38,7 @@ const projects: Project[] = [
     tag: "01 · Azure AKS · Integration",
     title: "Enterprise cloud-native integration platform",
     description:
-      "A secure, tenant-aware integration platform on AKS. KrakenD handles JWT auth, aggregation and rate limiting. Apache Camel orchestrates REST, SOAP, SFTP, file and database connectors with retries and dead-letter handling, while Kafka and Temporal keep workflows event-driven and resumable.",
+      "A secure, tenant-aware integration platform on AKS. KrakenD handles JWT auth, aggregation and rate limiting. Apache Camel orchestrates REST, SOAP, SFTP, file and database connectors with retries and dead-letter handling, while Kafka (Strimzi) with CloudEvents, replay and dead-letter queues and Temporal keep workflows event-driven and resumable.",
     wins: [
       { title: "Multi-tenant", sub: "Shared, isolated and dedicated models" },
       { title: "Policy as code", sub: "Kyverno, cert-manager and Key Vault" },
@@ -135,6 +135,7 @@ export default function Work(): React.JSX.Element {
       <div className="stack">
         {projects.map((p) => (
           <article key={p.title} className="spot case">
+            <span className="shade" aria-hidden="true" />
             <div className="cb">
               <span className="cnum">{p.tag.toUpperCase()}</span>
               <h3 className="ct">{p.title}</h3>

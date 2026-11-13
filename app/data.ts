@@ -41,7 +41,7 @@ export const facts = [
   { to: 3.5, decimals: 1, suffix: "+", label: "Years of experience" },
   { to: 20, decimals: 0, suffix: "+", label: "Projects secured with DevSecOps" },
   { to: 3, decimals: 0, suffix: "", label: "Companies in 2 countries" },
-  { to: 60, decimals: 0, suffix: "+", label: "Tools across the stack" },
+  { to: 90, decimals: 0, suffix: "+", label: "Tools and technologies" },
 ];
 
 export const focusAreas = [
@@ -87,40 +87,52 @@ export interface StackGroup {
 
 export const stackGroups: StackGroup[] = [
   {
-    title: "Cloud platforms",
-    tools: [t("azure", "Azure AKS"), t("azure", "Azure Functions"), t("azure", "Container Apps"), t("azure", "App Service"), t("aws", "Amazon EKS"), t("aws", "EC2"), t("aws", "Lambda"), t("aws", "S3"), t("aws", "Route 53"), t("aws", "ECR"), t("hetzner", "Hetzner")],
+    title: "Microsoft Azure",
+    tools: [t("azure", "AKS"), t("azuredevops", "Azure DevOps"), t("azure", "Azure Functions"), t("azure", "Container Apps"), t("azure", "App Service"), t("azure", "Azure VMs"), t("vault", "Key Vault"), t("azure", "Blob Storage")],
+  },
+  {
+    title: "AWS and other clouds",
+    tools: [t("aws", "EKS"), t("aws", "EC2"), t("aws", "Lambda"), t("aws", "S3"), t("aws", "ECR"), t("aws", "IAM"), t("aws", "VPC"), t("aws", "Route 53"), t("aws", "CloudTrail"), t("hetzner", "Hetzner")],
   },
   {
     title: "Containers and orchestration",
-    tools: [t("kubernetes", "Kubernetes"), t("docker", "Docker"), t("helm", "Helm"), t("kubernetes", "Kind"), t("proxmox", "Proxmox")],
+    tools: [t("kubernetes", "Kubernetes"), t("docker", "Docker"), t("helm", "Helm"), t("kubernetes", "Kind"), t("docker", "Docker Hub"), t("proxmox", "Proxmox")],
   },
   {
     title: "CI/CD and GitOps",
-    tools: [t("githubactions", "GitHub Actions"), t("gitlab", "GitLab CI"), t("jenkins", "Jenkins"), t("azuredevops", "Azure Pipelines"), t("aws", "CodeBuild"), t("argo", "ArgoCD"), t("flux", "FluxCD")],
+    tools: [t("githubactions", "GitHub Actions"), t("gitlab", "GitLab CI"), t("jenkins", "Jenkins"), t("azuredevops", "Azure Pipelines"), t("aws", "CodeBuild"), t("aws", "CodeCommit"), t("argo", "ArgoCD"), t("flux", "FluxCD")],
   },
   {
-    title: "Infrastructure as Code",
-    tools: [t("terraform", "Terraform"), t("aws", "CloudFormation"), t("ansible", "Ansible"), t("python", "Python"), t("gnubash", "Bash")],
+    title: "IaC and automation",
+    tools: [t("terraform", "Terraform"), t("aws", "CloudFormation"), t("ansible", "Ansible"), t("python", "Python"), t("gnubash", "Bash"), t("git", "Git")],
   },
   {
     title: "Observability",
     tools: [t("prometheus", "Prometheus"), t("grafana", "Grafana"), t("grafana", "Loki"), t("opentelemetry", "OpenTelemetry"), t("elasticsearch", "Elasticsearch"), t("logstash", "Logstash"), t("kibana", "Kibana"), t("datadog", "Datadog"), t("aws", "CloudWatch")],
   },
   {
-    title: "Security and compliance",
-    tools: [t("sonarqubeserver", "SonarQube"), t("trivy", "Trivy"), t("owasp", "OWASP ZAP"), t(null, "Nmap"), t(null, "Nikto"), t(null, "ffuf"), t(null, "Kyverno"), t(null, "cert-manager"), t("letsencrypt", "TLS"), t("vault", "Key Vault"), t("keycloak", "Keycloak")],
+    title: "DevSecOps and compliance",
+    tools: [t("sonarqubeserver", "SonarQube"), t("trivy", "Trivy"), t(null, "Kyverno"), t(null, "cert-manager"), t("letsencrypt", "SSL/TLS"), t("keycloak", "Keycloak"), t(null, "IAM policies"), t(null, "Security Groups"), t(null, "Network ACLs")],
+  },
+  {
+    title: "Offensive security",
+    tools: [t("owasp", "OWASP ZAP"), t(null, "Nmap"), t(null, "Nikto"), t(null, "ffuf"), t(null, "DirBuster"), t(null, "Reconnaissance"), t(null, "Service enumeration")],
   },
   {
     title: "Networking and traffic",
-    tools: [t("nginx", "Nginx"), t("traefikproxy", "Traefik"), t("haproxy", "HAProxy"), t(null, "KrakenD"), t(null, "Keepalived"), t(null, "iptables")],
+    tools: [t("nginx", "Nginx"), t("traefikproxy", "Traefik"), t("haproxy", "HAProxy"), t(null, "KrakenD"), t(null, "Keepalived"), t(null, "iptables"), t(null, "UFW"), t(null, "DNS")],
   },
   {
-    title: "Messaging, data and workflows",
-    tools: [t("apachekafka", "Kafka (Strimzi)"), t("temporal", "Temporal"), t(null, "Apache Camel"), t("redis", "Redis Sentinel"), t(null, "CloudEvents")],
+    title: "Messaging and workflows",
+    tools: [t("apachekafka", "Kafka (Strimzi)"), t("temporal", "Temporal"), t(null, "Apache Camel"), t(null, "CloudEvents"), t("redis", "Redis Sentinel")],
   },
   {
-    title: "Linux and systems",
-    tools: [t("redhat", "RHEL 7/8"), t("centos", "CentOS"), t("ubuntu", "Ubuntu"), t("linux", "SELinux"), t("apache", "Apache"), t(null, "LVM / RAID"), t(null, "NFS / DNS")],
+    title: "Linux administration",
+    tools: [t("redhat", "RHEL 7/8"), t("centos", "CentOS"), t("ubuntu", "Ubuntu"), t("linux", "SELinux"), t("apache", "Apache"), t(null, "NFS"), t(null, "Samba"), t(null, "FTP")],
+  },
+  {
+    title: "Storage, backup and tuning",
+    tools: [t(null, "LVM"), t(null, "RAID"), t(null, "ext4 / xfs"), t(null, "rsync"), t(null, "Snapshots"), t(null, "tcpdump"), t(null, "iostat")],
   },
 ];
 

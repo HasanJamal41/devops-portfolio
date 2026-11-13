@@ -1,4 +1,5 @@
 import { contact, navLinks } from "../data";
+import CopyEmail from "./CopyEmail";
 import { Icon } from "./ui";
 
 const channels = [
@@ -31,6 +32,7 @@ export default function Contact(): React.JSX.Element {
                 <Icon.download />
                 Download résumé
               </a>
+              <CopyEmail email={contact.email} />
             </div>
           </div>
           <div className="clist">
@@ -58,7 +60,7 @@ export default function Contact(): React.JSX.Element {
               <p>DevOps Engineer building secure, automated cloud platforms on AWS and Azure. Based in {contact.location}.</p>
             </div>
             <div>
-              <h4>Navigate</h4>
+              <p className="fh">Navigate</p>
               <ul>
                 {navLinks.map((l) => (
                   <li key={l.id}>
@@ -68,7 +70,7 @@ export default function Contact(): React.JSX.Element {
               </ul>
             </div>
             <div>
-              <h4>Connect</h4>
+              <p className="fh">Connect</p>
               <ul>
                 <li><a href={`mailto:${contact.email}`}>Email</a></li>
                 <li><a href={contact.linkedin} {...ext}>LinkedIn</a></li>

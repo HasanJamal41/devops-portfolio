@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { contact, navLinks } from "../data";
 import { Icon } from "./ui";
 
@@ -8,38 +8,58 @@ export default function Nav(): React.JSX.Element {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState(-1);
-  const progress = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sections = navLinks.map((l) => document.getElementById(l.id));
+    // Active link: whichever section crosses a thin band 40% down the screen.
+    // An observer avoids reading layout on every scroll frame.
+    const ids = navLinks.map((l) => l.id);
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(ids.indexOf(e.target.id));
+        });
+      },
+      { rootMargin: "-40% 0px -59% 0px" }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) spy.observe(el);
+    });
+
     const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (progress.current) {
-        progress.current.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
-      }
       setScrolled(window.scrollY > 20);
-      let current = -1;
-      sections.forEach((s, i) => {
-        if (s && s.getBoundingClientRect().top < window.innerHeight * 0.4) current = i;
-      });
-      setActive(current);
+      if (window.scrollY < 200) setActive(-1);
     };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onResize = () => window.innerWidth > 1024 && setOpen(false);
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      spy.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   return (
     <>
-      <div className="progress" ref={progress} aria-hidden="true" />
+      <div className="progress" aria-hidden="true" />
       <header className={`nav${scrolled ? " scrolled" : ""}`}>
         <div className="navin">
-          <a className="brand" href="#top">
-            <span className="mark">HJ</span>Hasan Jamal
+          <a className="brand" href="#top" title="Back to top">
+            <span className="mark" aria-hidden="true">HJ</span>Hasan Jamal
           </a>
           <nav className="links" aria-label="Primary">
             {navLinks.map((l, i) => (
-              <a key={l.id} href={`#${l.id}`} className={i === active ? "active" : undefined}>
+              <a
+                key={l.id}
+                href={`#${l.id}`}
+                className={i === active ? "active" : undefined}
+                aria-current={i === active ? "true" : undefined}
+              >
                 {l.label}
               </a>
             ))}
@@ -52,17 +72,21 @@ export default function Nav(): React.JSX.Element {
             className="menu-btn"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((o) => !o)}
           >
             <Icon.menu />
           </button>
         </div>
-        <nav className={`sheet${open ? " open" : ""}`} aria-label="Mobile">
+        <nav id="mobile-menu" className={`sheet${open ? " open" : ""}`} aria-label="Mobile">
           {navLinks.map((l) => (
             <a key={l.id} href={`#${l.id}`} onClick={() => setOpen(false)}>
               {l.label}
             </a>
           ))}
+          <a href={contact.resume} download onClick={() => setOpen(false)}>
+            Download résumé
+          </a>
         </nav>
       </header>
     </>
