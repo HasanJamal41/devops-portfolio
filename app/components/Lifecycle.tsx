@@ -17,7 +17,7 @@ export default function Lifecycle(): React.JSX.Element {
         <p className="sub rv">The delivery loop I build for every team, with the tools I use at each stage.</p>
       </div>
 
-      <div className="flow rv">
+      <div className="flow" data-stagger>
         <div className="track-line" aria-hidden="true">
           <i />
         </div>

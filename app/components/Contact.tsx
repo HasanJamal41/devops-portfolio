@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { contact, navLinks } from "../data";
 import CopyEmail from "./CopyEmail";
 import { Icon } from "./ui";
@@ -75,6 +76,7 @@ export default function Contact(): React.JSX.Element {
                 <li><a href={`mailto:${contact.email}`}>Email</a></li>
                 <li><a href={contact.linkedin} {...ext}>LinkedIn</a></li>
                 <li><a href={contact.whatsapp} {...ext}>WhatsApp</a></li>
+                <li><Link href="/resume">Résumé (web)</Link></li>
                 <li><a href={contact.resume} download>Résumé (PDF)</a></li>
               </ul>
             </div>

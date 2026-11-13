@@ -8,6 +8,7 @@ export default function Nav(): React.JSX.Element {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState(-1);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     // Active link: whichever section crosses a thin band 40% down the screen.
@@ -26,9 +27,16 @@ export default function Nav(): React.JSX.Element {
       if (el) spy.observe(el);
     });
 
+    // Hide the bar while reading downwards, bring it back on any upward scroll.
+    let lastY = window.scrollY;
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-      if (window.scrollY < 200) setActive(-1);
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      if (y < 200) setActive(-1);
+      if (Math.abs(y - lastY) > 6) {
+        setHidden(y > lastY && y > 480);
+        lastY = y;
+      }
     };
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     const onResize = () => window.innerWidth > 1024 && setOpen(false);
@@ -47,7 +55,7 @@ export default function Nav(): React.JSX.Element {
   return (
     <>
       <div className="progress" aria-hidden="true" />
-      <header className={`nav${scrolled ? " scrolled" : ""}`}>
+      <header className={`nav${scrolled ? " scrolled" : ""}${hidden && !open ? " hide" : ""}`} onFocus={() => setHidden(false)}>
         <div className="navin">
           <a className="brand" href="#top" title="Back to top">
             <span className="mark" aria-hidden="true">HJ</span>Hasan Jamal

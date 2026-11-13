@@ -1,4 +1,5 @@
 import { moreProjects, projectTools, type Tool } from "../data";
+import { Fragment } from "react";
 import { Chips, Logo } from "./ui";
 
 interface Node {
@@ -140,7 +141,7 @@ export default function Work(): React.JSX.Element {
               <span className="cnum">{p.tag.toUpperCase()}</span>
               <h3 className="ct">{p.title}</h3>
               <p className="cd">{p.description}</p>
-              <div className="wins">
+              <div className="wins" data-stagger>
                 {p.wins.map((w) => (
                   <div key={w.title} className="win">
                     <b>{w.title}</b>
@@ -150,23 +151,23 @@ export default function Work(): React.JSX.Element {
               </div>
               <Chips tools={p.tools} />
             </div>
-            <div className="dia" role="img" aria-label={p.diagramAlt}>
+            <div className="dia" role="img" aria-label={p.diagramAlt} data-stagger>
               <span className="dtag">
                 <span className="live" />
                 {p.diagramLabel}
               </span>
               {p.rows.map((row, i) => (
-                <div key={i} style={{ display: "contents" }}>
+                <Fragment key={i}>
                   {i > 0 && <div className="vl" />}
                   <div className="drow">
                     {row.nodes.map((n, j) => (
-                      <div key={n.label} style={{ display: "contents" }}>
+                      <Fragment key={n.label}>
                         {row.linked && j > 0 && <span className="hl" />}
                         <DiagramNode node={n} />
-                      </div>
+                      </Fragment>
                     ))}
                   </div>
-                </div>
+                </Fragment>
               ))}
             </div>
           </article>

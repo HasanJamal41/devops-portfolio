@@ -71,10 +71,19 @@ h1,h2,h3,p{margin:0}
 .console::before{content:'';position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1;z-index:-1;background:conic-gradient(transparent 0 64%,var(--c1) 76%,var(--c2) 86%,transparent 100%);transform:translate(-50%,-50%);animation:sweep 6s linear infinite;will-change:transform}
 @keyframes sweep{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .console-in{position:relative;border-radius:19px;background:#080A10;overflow:hidden}
-.cbar{display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--muted)}
+.cbar{display:flex;align-items:center;gap:8px;height:48px;padding:0 16px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--muted)}
 .cbar i{width:11px;height:11px;border-radius:50%;display:block}
-.cbar span{margin-left:auto}
-.cbody{padding:20px 22px 22px;font:13px/1.9 var(--mono);min-height:264px;color:var(--soft)}
+.cbody{padding:16px 22px 18px;font:13px/1.85 var(--mono);height:330px;overflow:hidden;color:var(--soft);animation:term-in .5s cubic-bezier(.22,1,.36,1)}
+@keyframes term-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cctx{margin-bottom:6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ctabs{margin-left:auto;display:flex;gap:2px}
+.ctabs button{height:40px;padding:0 10px;border:0;border-radius:9px;background:transparent;color:var(--muted);font:12px var(--mono);cursor:pointer;transition:background .3s,color .3s}
+.ctabs button:hover{color:var(--text)}
+.ctabs button.on{background:rgba(79,227,255,.12);color:var(--c1)}
+.cprog{height:2px;overflow:hidden}
+.cprog i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.cprog i.run{animation:cprog 3.8s linear forwards}
+@keyframes cprog{to{transform:scaleX(1)}}
 .cbody .row{white-space:pre-wrap;overflow-wrap:anywhere}
 .pr{color:var(--c1)}.dim{color:#8088A0}.okc{color:var(--ok)}.vio{color:var(--c2)}
 .cursor{display:inline-block;width:8px;height:15px;background:var(--c1);vertical-align:-2px;animation:blink 1s steps(1) infinite}
@@ -360,11 +369,29 @@ h1,h2,h3,p{margin:0}
 .copy svg{width:16px;height:16px}
 .icon-btn{width:48px;padding:0}
 
+
+/* smooth extras */
+.nav{transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.nav.hide{transform:translateY(calc(-100% - 28px))}
+.console-wrap{perspective:1400px}
+.console{transform-style:preserve-3d}
+.btn-p{overflow:hidden}
+.btn-p::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-130%);transition:transform .9s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.btn-p:hover::after{transform:translateX(130%)}
+.btn svg{transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.btn:hover svg{transform:translateX(3px)}
+.chip{transition:border-color .3s,color .3s,background .3s}
+.chip:hover{border-color:rgba(79,227,255,.4);color:var(--text);background:#121624}
+.kicker::before{transition:width .8s cubic-bezier(.22,1,.36,1)}
+.head:hover .kicker::before{width:44px}
+/* groups whose children cascade in with Motion */
+.js [data-stagger]:not(.in)>*{opacity:0}
+
 /* reveal */
 /* hidden until Motion reveals it; without JS everything stays visible */
 .js .rv:not(.in){opacity:0}
 
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv:not(.in){opacity:1}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv:not(.in),.js [data-stagger]:not(.in)>*{opacity:1}}
 
 @media (max-width:1024px){
 .links,.nav .btn-p{display:none}
@@ -396,7 +423,10 @@ h1,h2,h3,p{margin:0}
 .orb{display:none}
 .b3{display:none}
 .blob{filter:blur(70px)}
-.cbody{font-size:11px;padding:16px;min-height:220px}
+.cbody{font-size:11px;padding:14px 16px;height:300px}
+.cbar i{display:none}
+.ctabs{margin:0 auto}
+.ctabs button{padding:0 8px;font-size:11px}
 .cfoot div{padding:12px}
 .cfoot b{font-size:13px}
 .bento,.stats{grid-template-columns:minmax(0,1fr)}
@@ -413,3 +443,6 @@ h1,h2,h3,p{margin:0}
 .v-code{font-size:11px}
 .stages{gap:6px}.stg{font-size:10px}
 }
+
+/* printing (the résumé page): plain white paper */
+@media print{html,body{background:#fff!important;color:#000}.skip,.progress{display:none}}

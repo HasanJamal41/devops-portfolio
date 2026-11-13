@@ -126,9 +126,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <a className="skip" href="#about">
-          Skip to content
-        </a>
         {children}
         <Analytics />
       </body>

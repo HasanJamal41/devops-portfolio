@@ -36,7 +36,7 @@ export default function Experience(): React.JSX.Element {
               <p className="jq">{role.summary}</p>
             </div>
             <div>
-              <ul className="pts">
+              <ul className="pts" data-stagger>
                 {role.points.map((point) => (
                   <li key={point}>{point}</li>
                 ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { animate, hover, inView, scroll } from "motion";
+import { animate, hover, inView, scroll, stagger } from "motion";
 
 // One soft ease used for every entrance on the page.
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -30,17 +30,47 @@ export default function Effects(): null {
             }
             const delay = parseFloat(getComputedStyle(el).getPropertyValue("--rd")) || 0;
             el.classList.add("in");
-            animate(el, { opacity: [0, 1], y: [28, 0], filter: ["blur(6px)", "blur(0px)"] }, { duration: 0.9, delay, ease: EASE }).then(
+            // Section headings rise through a mask; everything else fades up out of a soft blur.
+            const heading = el.matches(".h2, .ch");
+            const keyframes = heading
+              ? { opacity: [0, 1], y: [48, 0], clipPath: ["inset(0 0 100% 0)", "inset(0 0 -20% 0)"] }
+              : { opacity: [0, 1], y: [28, 0], filter: ["blur(6px)", "blur(0px)"] };
+            animate(el, keyframes, { duration: heading ? 1.05 : 0.9, delay, ease: EASE }).then(
               // Motion commits final values inline when it finishes; clear them a frame later.
               () =>
                 requestAnimationFrame(() => {
                   el.style.removeProperty("transform");
                   el.style.removeProperty("opacity");
                   el.style.removeProperty("filter");
+                  el.style.removeProperty("clip-path");
                 })
             );
           },
           { margin: "0px 0px -8% 0px" }
+        )
+      );
+    });
+
+    // Groups whose children cascade in one after another: chips, bullet lists, lifecycle stages, diagram rows.
+    document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
+      stops.push(
+        inView(
+          group,
+          () => {
+            group.classList.add("in");
+            if (reduce) return;
+            const kids = Array.from(group.children) as HTMLElement[];
+            animate(kids, { opacity: [0, 1], y: [14, 0] }, { duration: 0.6, delay: stagger(0.055, { startDelay: 0.12 }), ease: EASE }).then(
+              () =>
+                requestAnimationFrame(() =>
+                  kids.forEach((k) => {
+                    k.style.removeProperty("transform");
+                    k.style.removeProperty("opacity");
+                  })
+                )
+            );
+          },
+          { margin: "0px 0px -6% 0px" }
         )
       );
     });
@@ -93,6 +123,37 @@ export default function Effects(): null {
     }
 
     if (!reduce) {
+      // Hero drifts up and fades as you scroll away; the aurora moves slower for depth.
+      const hero = document.querySelector<HTMLElement>(".hero");
+      const heroGrid = document.querySelector<HTMLElement>(".hero-grid");
+      const aurora = document.querySelector<HTMLElement>(".aurora");
+      if (hero && heroGrid) {
+        stops.push(scroll(animate(heroGrid, { y: [0, 140], opacity: [1, 0.15] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] }));
+      }
+      if (hero && aurora) {
+        stops.push(scroll(animate(aurora, { y: [0, 220] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] }));
+      }
+
+      // Terminal tilts toward the cursor on a soft spring.
+      const wrap = document.querySelector<HTMLElement>(".console-wrap");
+      const consoleEl = document.querySelector<HTMLElement>(".console");
+      if (fine && wrap && consoleEl) {
+        const tilt = { type: "spring", stiffness: 120, damping: 16, mass: 0.8 } as const;
+        const move = (e: PointerEvent) => {
+          const r = wrap.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          animate(consoleEl, { rotateY: x * 8, rotateX: -y * 8 }, tilt);
+        };
+        const leave = () => animate(consoleEl, { rotateY: 0, rotateX: 0 }, tilt);
+        wrap.addEventListener("pointermove", move, { passive: true });
+        wrap.addEventListener("pointerleave", leave);
+        stops.push(() => {
+          wrap.removeEventListener("pointermove", move);
+          wrap.removeEventListener("pointerleave", leave);
+        });
+      }
+
       // Reading progress bar.
       const bar = document.querySelector<HTMLElement>(".progress");
       if (bar) stops.push(scroll(animate(bar, { scaleX: [0, 1] }, { ease: "linear" })));

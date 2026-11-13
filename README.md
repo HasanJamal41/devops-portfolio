@@ -4,7 +4,7 @@ Personal portfolio for Hasan Jamal, DevOps and DevSecOps engineer. Built with [N
 
 ## Sections
 
-- **Hero** with an interactive node network, a release terminal (Terraform, Trivy, ArgoCD, kubectl) and a rotating headline.
+- **Hero** with an interactive node network, a rotating headline and a tabbed terminal that plays four sessions: deploy (Terraform, Helm, ArgoCD, kubectl), cluster, security (SonarQube, Trivy, OWASP ZAP, Kyverno) and observe (Prometheus, Loki, OpenTelemetry).
 - **About** with key facts, focus areas and education.
 - **Delivery lifecycle** from plan to monitor, with the tools used at each stage.
 - **Capabilities** shown as live tiles: CI/CD pipeline, multi-cloud, self-healing pods, metrics, security radar, IaC and Linux.
@@ -12,8 +12,9 @@ Personal portfolio for Hasan Jamal, DevOps and DevSecOps engineer. Built with [N
 - **Experience** as a git-style timeline with full role details.
 - **Projects**: three featured case studies with animated architecture diagrams, plus six more.
 - **Principles** and **Contact**, followed by a full footer.
+- **Résumé** at `/resume`: a light, printable, ATS-friendly page. The downloadable PDF in `public/Hasan-Jamal-Resume.pdf` is printed from it (Chrome: `chrome --headless --no-pdf-header-footer --print-to-pdf=Hasan-Jamal-Resume.pdf <site>/resume`), so the web and PDF versions always match. Content lives in `app/resume/content.ts`.
 
-Animations use [Motion](https://motion.dev): scroll reveals, count-up numbers, spring hover, and scroll-linked effects (progress bar, experience rail, stacking project cards) that run on the browser's native ScrollTimeline where available. Looping CSS animations pause when their section is off screen. All motion is disabled under `prefers-reduced-motion`.
+Animations use [Motion](https://motion.dev): mask reveals on headings, soft blur-up reveals, cascading lists and diagram rows, count-up numbers, spring hover, a 3D tilt on the terminal, a hide-on-scroll nav, and scroll-linked effects (hero parallax, progress bar, experience rail, stacking project cards) that run on the browser's native ScrollTimeline where available. Looping CSS animations pause when their section is off screen. All motion is disabled under `prefers-reduced-motion`.
 
 Fonts (Bricolage Grotesque, Inter, JetBrains Mono, all SIL Open Font License) are self-hosted in `app/fonts` and loaded with `next/font/local`.
 

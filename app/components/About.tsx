@@ -29,7 +29,7 @@ export default function About(): React.JSX.Element {
             I also work on the offensive side of security: reconnaissance and service enumeration with Nmap, automated
             scanning with OWASP ZAP, Nikto and ffuf, and hardening the infrastructure I find gaps in.
           </p>
-          <ul className="focus">
+          <ul className="focus" data-stagger>
             {focusAreas.map((f) => (
               <li key={f}>{f}</li>
             ))}

@@ -13,6 +13,9 @@ import Effects from "./components/Effects";
 export default function Home(): React.JSX.Element {
   return (
     <>
+      <a className="skip" href="#about">
+        Skip to content
+      </a>
       <Nav />
       <main id="top">
         <Hero />

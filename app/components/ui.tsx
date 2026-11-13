@@ -19,7 +19,7 @@ export function ToolMark({ tool, size = 16 }: { tool: Tool; size?: number }) {
 
 export function Chips({ tools }: { tools: Tool[] }) {
   return (
-    <div className="chips">
+    <div className="chips" data-stagger>
       {tools.map((tool) => (
         <span key={tool.name} className="chip">
           <ToolMark tool={tool} />

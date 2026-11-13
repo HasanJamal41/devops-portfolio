@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { contact } from "../data";
-import { NetworkCanvas, Rotator, Terminal } from "./HeroMotion";
+import { NetworkCanvas, Rotator } from "./HeroMotion";
+import { Terminal } from "./Terminal";
 import { Icon, Logo } from "./ui";
 
 const orbs = [
@@ -79,12 +80,6 @@ export default function Hero(): React.JSX.Element {
           ))}
           <div className="console">
             <div className="console-in">
-              <div className="cbar">
-                <i style={{ background: "#FF5F57" }} />
-                <i style={{ background: "#FEBC2E" }} />
-                <i style={{ background: "#28C840" }} />
-                <span>release · production</span>
-              </div>
               <Terminal />
               <div className="cfoot">
                 <div>
