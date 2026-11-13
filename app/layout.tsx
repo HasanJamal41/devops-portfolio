@@ -1,18 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
+// Fonts are bundled from npm so builds never depend on fetching Google Fonts.
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
-import CursorTrail from "./components/CursorTrail";
-
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hasanjamal.dev"),
   title: "Hasan Jamal - DevOps Engineer | Cloud, Kubernetes & DevSecOps",
   description: "DevOps Engineer with 3.5+ years hardening multi-cloud platforms across AWS and Azure. GitOps, Kubernetes at scale, CI/CD automation, and a DevSecOps mindset baked into every pipeline.",
   keywords: [
@@ -36,6 +32,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Hasan Jamal" }],
   creator: "Hasan Jamal",
   publisher: "Hasan Jamal",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -66,6 +63,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: "#05060A",
 };
 
 export default function RootLayout({
@@ -74,15 +72,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://hasanjamal.dev" />
+        {/* Mark JS as available before paint so scroll-reveal content never flashes. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body
-        className={`${poppins.variable} font-sans antialiased`}
-      >
+      <body>
         {children}
-        <CursorTrail />
         <Analytics />
       </body>
     </html>

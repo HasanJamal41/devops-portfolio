@@ -1,21 +1,26 @@
-import Header from "./components/Header";
-import Banner from "./components/Banner";
+import Nav from "./components/Nav";
+import Hero from "./components/Hero";
+import { Marquee, Stats } from "./components/Stack";
+import Capabilities from "./components/Capabilities";
 import Experience from "./components/Experience";
-import Timeline from "./components/Timeline";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Footer from "./components/Footer";
+import Work from "./components/Work";
+import Contact from "./components/Contact";
+import Effects from "./components/Effects";
 
 export default function Home(): React.JSX.Element {
   return (
-    <main className="min-h-screen bg-[#110720] text-white">
-      <Header />
-      <Banner />
-      <Experience />
-      <Timeline />
-      <About />
-      <Projects />
-      <Footer />
-    </main>
+    <>
+      <Nav />
+      <main id="top">
+        <Hero />
+        <Marquee />
+        <Stats />
+        <Capabilities />
+        <Experience />
+        <Work />
+        <Contact />
+      </main>
+      <Effects />
+    </>
   );
 }

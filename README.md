@@ -1,53 +1,32 @@
-# Personal Developer Portfolio 🚀
+# Hasan Jamal — DevOps Portfolio
 
-[![Site preview](/public/assets/thumbnail.png)](https://figma-portfolio-ten.vercel.app/)
+Personal portfolio for Hasan Jamal, DevOps & DevSecOps engineer. Built with [Next.js](https://nextjs.org/) (App Router) and TypeScript, statically generated, and deployed on Vercel.
 
-Welcome to my developer portfolio! This project showcases my skills, projects, and experience as a Software Engineer and UI/UX Designer. Built with [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com). It not only provides a visually appealing representation of my work but also ensures optimal performance. View the [live site](https://figma-portfolio-ten.vercel.app/).
+## Highlights
 
-# Features 🎉
+- **Animated hero** — an interactive node network on canvas, a self-typing `kubectl` / `argocd` terminal and a cycling headline.
+- **Live capability tiles** — a running CI/CD pipeline, a self-healing pod grid, streaming metrics and a security radar, all in CSS.
+- **Git-graph experience timeline** that fills as you scroll.
+- **Architecture case studies** with traffic flowing through each diagram, stacking as you scroll.
+- **Real tool logos** for the whole stack in `public/logos`.
+- Scroll reveals, decoding section labels, cursor spotlight cards and magnetic buttons — all disabled under `prefers-reduced-motion`.
+- Fully responsive, with SEO metadata and Vercel Analytics.
 
-The whole [portfolio](https://figma-portfolio-ten.vercel.app/) is a React-based single page app built with Next.js in TypeScript, using only statically generated pages.
+## Editing content
 
-- **Modern Design**: Beautiful, dark-themed UI designed in Figma with purple gradient accents
-- **Animated Typing Effect**: Dynamic text animation in the hero section that cycles through roles
-- **Responsive Layout**: Fully responsive design that works seamlessly on all devices
-- **Performance Optimized**: Built with Next.js 16 for optimal performance and SEO
-- **Project Showcase**: Featured projects section with detailed descriptions and links
-- **Smooth Animations**: Engaging user experience with smooth transitions and effects
-- **Analytics Integration**: Vercel Analytics for tracking website performance
+All copy that changes over time — roles, stats, tool lists and contact details — lives in [`app/data.ts`](app/data.ts). Project case studies are defined at the top of [`app/components/Work.tsx`](app/components/Work.tsx). Styles and animations are in [`app/globals.css`](app/globals.css).
 
-# Fonts ✍🏻
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load [Poppins](https://fonts.google.com/specimen/Poppins), a custom Google Font with multiple weights (300-900).
-
-# Project images 🖼️
-
-All project images live under `public/projects` and are referenced in the `Projects.tsx` component. The assets folder contains all icons, images, and other media files used throughout the portfolio.
-
-# ✨ Development
+## Development
 
 ```bash
-git clone git@github.com:ibrahimmemonn/Figma_Portfolio.git
-
-cd Figma_Portfolio/
-
-npm i
-
-npm run dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-# 🚚 Deployment
+Pushing to `main` triggers a Vercel deployment. No environment variables or secrets are required.
 
-Every branch or Pull Request is automatically deployed by [Vercel](https://vercel.com/) with their GitHub integration, where the `main` branch is automatically aliased to [figma-portfolio-ten.vercel.app](https://figma-portfolio-ten.vercel.app/). A link to a preview deployment will appear under each Pull Request.
-
-# 🏛 Licenses
-
-© Copyright 2025 Ibrahim Memon
-
-Don't care if you fork & play with it, but you're not allowed to publish anything from it as a whole without my written permission. Also please be aware, the combination of typography, colors & layout makes up my brand identity. So please don't just clone everything, but rather do a remix!
-
----
-
-⭐ If you found this project helpful or interesting, please consider giving it a star!
+Tool logos come from [Simple Icons](https://simpleicons.org/) and [Devicon](https://devicon.dev/); trademarks belong to their respective owners.
